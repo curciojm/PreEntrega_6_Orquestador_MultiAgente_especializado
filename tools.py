@@ -1,9 +1,9 @@
 from langchain_core.tools import tool
 from sklearn.metrics.pairwise import cosine_similarity
 
+from errors import classify_error
 from schemas import ResultadoConcepto, ResultadoFuente, ResultadoEvaluacion
 from logging_config import logger
-from errors import classify_error
 from retriever import retriever_hibrido
 from db_config import EMBEDDINGS
 
@@ -110,7 +110,6 @@ async def evaluar_concepto(
 
         docs = await retriever_hibrido.ainvoke(tema)
 
-        # aembed embedding asincrono
         embedding_respuesta = await EMBEDDINGS.aembed_query(
             respuesta_usuario
         )

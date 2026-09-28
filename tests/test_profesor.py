@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
-import agents.profesor as profesor
+from agents import profesor
 
 
 class FakeAgent:

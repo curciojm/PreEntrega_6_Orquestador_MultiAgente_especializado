@@ -1,14 +1,11 @@
 from langchain.agents import create_agent
-
-from logging_config import logger
-from models import get_model
-from schemas import AgentState
 from langchain_core.messages import HumanMessage, AIMessage
+
+from models import get_model
+from logging_config import logger
 from errors import classify_error
-
+from schemas import AgentState
 from tools import buscar_concepto, buscar_fuente
-
-from langchain.agents import create_agent
 
 
 PROFESOR_PROMPT = """
@@ -110,9 +107,3 @@ async def nodo_profesor(state: AgentState) -> dict:
     )
 
     raise classify_error(last_error)
-
-# LE BORRE LA REGLA DE QUE BUSQUE CUANTO NECESITE
-
-# Pero Gemini AFC puede decidir generar dos tool calls en la misma respuesta, 
-# y el framework puede ejecutarlas concurrentemente. 
-# El await de cada herramienta no necesariamente impide eso.

@@ -2,11 +2,11 @@ from typing import Literal
 
 from langgraph.graph import StateGraph, START, END
 
-from schemas import AgentState
-from agents.supervisor import nodo_supervisor
 from agents.profesor import nodo_profesor
+from agents.supervisor import nodo_supervisor
 from agents.evaluador import nodo_evaluador
 from agents.sintesis import nodo_sintesis
+from schemas import AgentState
 
 
 def enrutar(

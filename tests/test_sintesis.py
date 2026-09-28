@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
-import agents.sintesis as sintesis
+from agents import sintesis
 
 
 class FakeLLM:

@@ -3,7 +3,6 @@ from langchain_core.documents import Document
 
 import tools
 from schemas import LLMError, ResultadoConcepto, ResultadoFuente, ResultadoEvaluacion
-
 from tools import buscar_concepto, buscar_fuente, evaluar_concepto
 
 

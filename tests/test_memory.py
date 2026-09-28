@@ -3,9 +3,9 @@ from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 
 from graph_config import grafo
-import agents.supervisor as supervisor
-import agents.profesor as profesor
-import agents.sintesis as sintesis
+from agents import supervisor
+from agents import profesor
+from agents import sintesis
 from schemas import DecisionSupervisor
 
 

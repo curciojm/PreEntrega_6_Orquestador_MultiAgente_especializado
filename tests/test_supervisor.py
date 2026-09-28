@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import HumanMessage
 
-import agents.supervisor as supervisor
+from agents import supervisor
 from schemas import DecisionSupervisor
 
 

@@ -1,14 +1,12 @@
 from langchain.agents import create_agent
+from langchain_core.messages import HumanMessage, AIMessage
 
+from errors import classify_error
 from logging_config import logger
 from models import get_model
 from schemas import AgentState
-from langchain_core.messages import HumanMessage, AIMessage
-from errors import classify_error
-
 from tools import evaluar_concepto, buscar_concepto, buscar_fuente
 
-# el agente se construye dentro del nodo para que funcione el FALLBACK
 
 EVALUADOR_PROMPT = """
 Sos un agente especializado en evaluar respuestas de estudiantes
@@ -154,46 +152,3 @@ async def nodo_evaluador(state: AgentState) -> dict:
     )
 
     raise classify_error(last_error)
-
-
-# agente_evaluador = create_agent(
-#     model=get_model(provider),
-#     tools=[evaluar_concepto, buscar_fuente],
-#     system_prompt=(
-#         """
-#         Sos un agente especializado en evaluar respuestas de estudiantes
-#         sobre conceptos de metodología de la investigación y estadística.
-
-#         Tu función es evaluar el concepto explicado por el usuario utilizando
-#         la información recuperada mediante 'evaluar_concepto'.
-
-#         La evaluación debe basarse en la información proporcionada por las
-#         fuentes recuperadas y no únicamente en el conocimiento general del modelo.
-
-#         Indicá qué información le falta al usuario para mejorar su respuesta.
-
-#         Utilizá 'buscar_fuente' para indicar al usuario dónde puede
-#         encontrar o estudiar la información que le falta.
-
-#         Si las fuentes recuperadas no contienen información suficiente para
-#         evaluar la respuesta, indicálo claramente.
-#         """
-#     ),
-# )
-
-# def nodo_evaluador(state: AgentState) -> dict:
-#     tarea = state["messages"][-1].content  # contexto acotado, no todo el historial PREGUNTAR A CHAT
-#     resultado = agente_evaluador.invoke({"messages": [HumanMessage(content=tarea)]})
-#     respuesta = resultado["messages"][-1].content
-
-#     return {
-#         "messages": [AIMessage(content=respuesta, name="evaluador")],
-#         "contribuciones": [{"agente": "evaluador", "aporte": respuesta}],
-#         "pasos": state.get("pasos", 0) + 1,
-#     }
-
-# El agente puede leer tambien el estado por lo que si la info ya esta en 
-# el estado no hace falta crearla nuevamente
-# el usuario después pide una evaluación, el evaluador puede utilizar la información disponible 
-# en el estado sin volver a hacer retrieval innecesariamente
-# igual en el mio SI ES RELEVANTE PORQUE PUEDE CONVOCAR A EVALUADOR SIN CONVOCAR A AGENTE PROFESOR

@@ -1,11 +1,13 @@
-from schemas import AgentState, DecisionSupervisor
+from errors import classify_error
 from logging_config import logger
 from models import get_model
-from errors import classify_error
+from schemas import AgentState, DecisionSupervisor
+
+
+
 
 MAX_PASOS = 6
 
-# A diferencia de los otros prompt este es estatico, se ejecuta si o si, por eso conviene mantenerlo fuera del sistema
 SUPERVISOR_PROMPT = """Sos el Supervisor de un equipo con dos especialistas:
 
 - agente_profesor: responde consultas conceptuales del usuario y, si el usuario lo solicita,
@@ -43,7 +45,7 @@ Contribuciones hasta ahora:
 
 
 async def nodo_supervisor(state: AgentState) -> dict:
-    # finaliza si los pasos son mayor a 6
+
     if state.get("pasos", 0) >= MAX_PASOS:
         return {"next_agent": "FINISH", "task_completed": True}
 
@@ -52,20 +54,12 @@ async def nodo_supervisor(state: AgentState) -> dict:
         for c in state.get("contribuciones", [])
     ) or "(ninguna todavía)"
 
-    #pregunta_original = state["messages"][0].content
     pregunta_actual = state["messages"][-1].content
-    # format sirve para insertar strings dentro de
+
     prompt_sistema = SUPERVISOR_PROMPT.format(
         contribuciones=contribuciones_texto
     )
 
-    # messages = [
-    #     {"role": "system", "content": prompt_sistema},
-    #     {
-    #         "role": "user",
-    #         "content": f"Tarea original: {pregunta_original}",
-    #     },
-    # ]
     messages = [
     {"role": "system", "content": prompt_sistema},
     {
@@ -117,24 +111,3 @@ async def nodo_supervisor(state: AgentState) -> dict:
     logger.error("Todos los proveedores LLM fallaron")
 
     raise classify_error(last_error)
-
-
-# COMO HACER EL PROMT
-
-# Cuando necesites recuperar información de la base de conocimientos,
-# utiliza la herramienta `evaluar_concepto`.
-
-# Herramientas disponibles:
-
-# - `buscar_fuente`: recupera fragmentos relevantes de la base de
-#   conocimientos.
-# - `evaluar_concepto`: recupera información necesaria para evaluar
-#   el conocimiento del usuario sobre un concepto.
-# - `calcular_estadistico`: realiza cálculos estadísticos.
-
-# Utiliza la herramienta adecuada según la tarea.
-
-# OJO QUE HAY DOS ENFOQUEs:
-# Esto puede estar perfectamente bien si tu intención es que cada a
-# gente trabaje de manera independiente sobre la tarea y haga su propio retrieval.
-# Y por lo que acabás de explicar, creo que eso es justamente lo que querés.

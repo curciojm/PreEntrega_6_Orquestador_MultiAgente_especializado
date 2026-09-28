@@ -1,9 +1,11 @@
 from langchain_core.messages import HumanMessage, AIMessage
 
-from schemas import AgentState
-from models import get_model
 from errors import classify_error
 from logging_config import logger
+from models import get_model
+from schemas import AgentState
+
+
 
 
 async def nodo_sintesis(state: AgentState) -> dict:

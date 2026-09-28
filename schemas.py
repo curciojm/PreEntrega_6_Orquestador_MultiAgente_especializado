@@ -1,9 +1,9 @@
-from typing import Annotated, Optional, List, Dict, Literal
-from operator import add
-
 from enum import Enum
-from pydantic import Field, BaseModel
+from operator import add
+from typing import Annotated, Optional, List, Dict, Literal
 from langgraph.graph import MessagesState
+from pydantic import Field, BaseModel
+
 
 
 class AgentState(MessagesState):
@@ -12,7 +12,6 @@ class AgentState(MessagesState):
 
     next_agent: Optional[str]
 
-    # ADD CONCATENA LISTAS
     contribuciones: Annotated[List[Dict[str, str]], add]
 
     pasos: int

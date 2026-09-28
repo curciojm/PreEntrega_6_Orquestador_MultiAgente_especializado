@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
-import agents.evaluador as evaluador
+from agents import evaluador
 
 
 class FakeAgent:
