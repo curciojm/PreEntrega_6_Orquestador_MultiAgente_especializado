@@ -65,7 +65,7 @@ async def main():
 
         app = grafo.compile(checkpointer=checkpointer)
 
-        consulta = CONSULTA_EVALUADOR_MUY_BIEN
+        consulta = CONSULTA_EVALUADOR_MAL
 
         print("=" * 80)
         print("🧑 SOLICITUD")
