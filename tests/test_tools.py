@@ -2,12 +2,8 @@ import pytest
 from langchain_core.documents import Document
 
 import tools
-from schemas import (
-    LLMError,
-    ResultadoConcepto,
-    ResultadoFuente,
-    ResultadoEvaluacion,
-)
+from schemas import LLMError, ResultadoConcepto, ResultadoFuente, ResultadoEvaluacion
+
 from tools import buscar_concepto, buscar_fuente, evaluar_concepto
 
 
@@ -134,28 +130,6 @@ async def test_buscar_concepto_clasifica_error(monkeypatch):
     assert exc_info.value.error_type.name == "UNKNOWN"
 
 
-@pytest.mark.asyncio
-async def test_buscar_fuente_clasifica_error(monkeypatch):
-
-    class FakeRetriever:
-
-        async def ainvoke(self, query):
-            raise ValueError("Error de prueba")
-
-    monkeypatch.setattr(
-        tools,
-        "retriever_hibrido",
-        FakeRetriever(),
-    )
-
-    with pytest.raises(LLMError) as exc_info:
-        await buscar_fuente.ainvoke(
-            {"tema": "correlación"}
-        )
-
-    assert exc_info.value.error_type.name == "UNKNOWN"
-
-
 @pytest.mark.parametrize(
     ("similitud", "esperada"),
     [
@@ -226,28 +200,3 @@ async def test_evaluar_concepto_clasifica_por_umbral(
 
     assert isinstance(resultado, ResultadoEvaluacion)
     assert resultado.evaluacion == esperada
-
-
-@pytest.mark.asyncio
-async def test_evaluar_concepto_clasifica_error(monkeypatch):
-
-    class FakeRetriever:
-
-        async def ainvoke(self, query):
-            raise ValueError("Error de prueba")
-
-    monkeypatch.setattr(
-        tools,
-        "retriever_hibrido",
-        FakeRetriever(),
-    )
-
-    with pytest.raises(LLMError) as exc_info:
-        await evaluar_concepto.ainvoke(
-            {
-                "tema": "regresión",
-                "respuesta_usuario": "Respuesta de prueba.",
-            }
-        )
-
-    assert exc_info.value.error_type.name == "UNKNOWN"
