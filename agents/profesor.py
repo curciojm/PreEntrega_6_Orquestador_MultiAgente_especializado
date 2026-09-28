@@ -10,14 +10,6 @@ from tools import buscar_concepto, buscar_fuente
 
 from langchain.agents import create_agent
 
-from logging_config import logger
-from models import get_model
-from schemas import AgentState
-from langchain_core.messages import HumanMessage, AIMessage
-from errors import classify_error
-
-from tools import buscar_concepto, buscar_fuente
-
 
 PROFESOR_PROMPT = """
 Sos un profesor universitario especializado en metodología

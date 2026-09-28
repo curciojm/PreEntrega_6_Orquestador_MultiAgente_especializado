@@ -29,7 +29,9 @@ CONSULTA_EVALUADOR_BIEN = """
 Mi explicación sobre la regresión es:
 
 "La regresión es una técnica estadística que permite estudiar
-la relación entre una variable y una o más variables."
+la relación entre una variable y una o más variables. Permite cuantificar
+cómo cambia, en promedio, la variable dependiente cuando
+cambia una variable independiente"
 """
 
 CONSULTA_EVALUADOR_MUY_BIEN = """
@@ -42,7 +44,9 @@ una función que describe esa relación y permite cuantificar
 cómo cambia, en promedio, la variable dependiente cuando
 cambia una variable independiente. El modelo puede utilizarse
 tanto para analizar la relación entre las variables como para
-realizar predicciones."
+realizar predicciones. El criterio de ajuste de la recta utilizado es
+el método de minímos cuadrados, l cual busca la línea que minimiza la suma 
+de las diferencias al cuadrado entre los valores observados y los predichos."
 """
 
 CONFIG = {
@@ -61,9 +65,8 @@ async def main():
 
         app = grafo.compile(checkpointer=checkpointer)
 
-        # ACA PARA PROBAR CONSULTAS #
+        # Si se quiere probar una consulta distinta
         consulta = CONSULTA_EVALUADOR_MAL
-        ###########################################################
 
         print("=" * 80)
         print("🧑 SOLICITUD")

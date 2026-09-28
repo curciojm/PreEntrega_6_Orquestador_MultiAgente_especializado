@@ -40,16 +40,16 @@ async def buscar_concepto(consulta: str) -> list[ResultadoConcepto]:
     except Exception as e:
         logger.exception(
             "ERROR REAL en buscar_concepto"
-    )
+        )
 
-    error = classify_error(e)
+        error = classify_error(e)
 
-    logger.error(
-        "Error durante la ejecución de buscar_concepto: %s",
-        error.message,
-    )
+        logger.error(
+            "Error durante la ejecución de buscar_concepto: %s",
+            error.message,
+        )
 
-    raise error
+        raise error
 
 @tool
 async def buscar_fuente(tema: str) -> list[ResultadoFuente]:
@@ -103,7 +103,7 @@ async def evaluar_concepto(
         0.00 - 0.54 → Mal
         0.55 - 0.69 → Incompleta
         0.70 - 0.89 → Bien
-        0.90 - 1 → Muy bien
+        0.90 - 1.00 → Muy bien
 
     Estos umbrales no fueron calibrados empíricamente y la
     similitud semántica no constituye por sí sola una medida
@@ -153,29 +153,20 @@ async def evaluar_concepto(
                 f"{similitud:.2f}."
             ),
         )
-
-    # except Exception as e:
-    #     error = classify_error(e)
-
-    #     logger.error(
-    #         "Error durante la ejecución de evaluar_concepto: %s",
-    #         error.message,
-    #     )
-
-    #     raise error
+    
     except Exception as e:
         logger.exception(
             "ERROR REAL en evaluar_concepto"
     )
 
-    error = classify_error(e)
+        error = classify_error(e)
 
-    logger.error(
-        "Error durante la ejecución de evaluar_concepto: %s",
-        error.message,
-    )
+        logger.error(
+            "Error durante la ejecución de evaluar_concepto: %s",
+            error.message,
+        )
 
-    raise error
+        raise error
 
 # Sí, exactamente. Ahora llegaste al punto importante.
 

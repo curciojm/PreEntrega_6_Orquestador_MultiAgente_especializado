@@ -28,7 +28,7 @@ FLUJO OBLIGATORIO:
    Las categorías posibles son exactamente:
    "Mal", "Incompleta", "Bien" y "Muy bien".
 
-3. Si la evaluación es "Mal", "Incompleta", "Bien" o "Muy bien",
+3. Si la evaluación es "Mal", "Incompleta" o "Bien",
    utilizá 'buscar_fuente' para localizar dónde puede estudiar
    el concepto o la información que necesita.
 

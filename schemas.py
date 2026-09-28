@@ -53,7 +53,7 @@ class ResultadoFuente(BaseModel):
 
 class ResultadoEvaluacion(BaseModel):
 
-    evaluacion: Literal["Mal", "Incompleta", "Bien", "Muy bien", "Excelente"] = Field(
+    evaluacion: Literal["Mal", "Incompleta", "Bien", "Muy bien"] = Field(
         description="Evaluación del conocimiento del usuario sobre el concepto."
     )
 
