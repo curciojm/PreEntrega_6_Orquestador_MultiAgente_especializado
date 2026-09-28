@@ -24,5 +24,5 @@ def get_model(provider: str):
             temperature=0.4,
             max_tokens=500,
         )
-# push
+
     raise ValueError(f"Proveedor no soportado: {provider}")

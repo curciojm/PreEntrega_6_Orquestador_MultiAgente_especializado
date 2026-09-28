@@ -30,13 +30,6 @@ async def buscar_concepto(consulta: str) -> list[ResultadoConcepto]:
             for doc in docs[:5]
         ]
 
-    # except Exception as e:
-    #     error = classify_error(e)
-    #     logger.error(
-    #         "Error durante la ejecución de buscar_concepto: %s",
-    #         error.message,
-    #     )
-    #     raise error
     except Exception as e:
         logger.exception(
             "ERROR REAL en buscar_concepto"
@@ -167,11 +160,3 @@ async def evaluar_concepto(
         )
 
         raise error
-
-# Sí, exactamente. Ahora llegaste al punto importante.
-
-# Desde un punto de vista de diseño puro, si el agente ya tiene el contexto recuperado y su prompt le dice:
-
-# compará la respuesta con el contexto y clasificá entre Mal/Bien/Muy bien/Excelente
-
-# no necesitás una tool evaluar_concepto separada. El propio agente puede hacer esa evaluación.
