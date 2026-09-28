@@ -220,6 +220,8 @@ flowchart TD
     SY --> F[Respuesta final]
 ```
 
+Link original: https://mermaid.ai/d/ceb57e80-26df-478b-9dfe-8df3c492eb0b
+
 El flujo general es:
 
 ```text
