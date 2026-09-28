@@ -2,10 +2,7 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
 import graph_config
-from agents import supervisor
-from agents import profesor
-from agents import evaluador
-from agents import sintesis
+from agents import supervisor, profesor, evaluador, sintesis
 from schemas import DecisionSupervisor
 
 
