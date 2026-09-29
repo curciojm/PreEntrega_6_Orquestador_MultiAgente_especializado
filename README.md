@@ -2,6 +2,8 @@
 
 Proyecto correspondiente a la Pre-Entrega 6 del curso de AI Engineering.
 
+Link video de explicación del flujo de delegación: https://drive.google.com/file/d/15ePyc9Lz4mw-cTuv-E_9P9wg6nIHz9XC/view?usp=drive_link
+
 ## Descripción
 
 Orquestador multi-agente especializado implementado con LangGraph y LangChain, utilizando un Supervisor y dos agentes especialistas para resolver consultas relacionadas con metodología de la investigación y estadística.
